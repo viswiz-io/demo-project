@@ -1,6 +1,5 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const path = require('path');
 const webpack = require('webpack');
 
@@ -69,7 +68,6 @@ const webpackConfig = {
 		}),
 
 		new HtmlWebpackPlugin({
-			// title: 'VisWiz.io Sample Project',
 			template: 'public/index.html',
 		}),
 
