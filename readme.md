@@ -4,6 +4,8 @@ This is a simple demo project used in demos for [VisWiz.io](https://www.viswiz.i
 
 [![](https://img.shields.io/travis/viswiz-io/demo-project.svg)](https://travis-ci.org/viswiz-io/demo-project)
 
+Bogus change.
+
 ## Install
 
 ```
