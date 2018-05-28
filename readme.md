@@ -10,7 +10,7 @@ This is a simple demo project used in demos for [VisWiz.io](https://www.viswiz.i
 yarn
 ```
 
-## Usage
+## Use
 
 This will run automated visual tests using Jest, Puppeteer and VisWiz.io:
 
