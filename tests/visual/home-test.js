@@ -6,7 +6,7 @@ describe('/ (Home Page)', () => {
 	beforeAll(async () => {
 		page = await __BROWSER__.newPage();
 		await page.setViewport(config.viewport);
-		await page.goto(`${config.url}/`);
+		await page.goto(`${config.url}/${config.random}`);
 	}, config.timeout);
 
 	afterAll(async () => {

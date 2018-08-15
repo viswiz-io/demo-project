@@ -6,7 +6,7 @@ describe('/dashboard (Dashboard Page)', () => {
 	beforeAll(async () => {
 		page = await __BROWSER__.newPage();
 		await page.setViewport(config.viewport);
-		await page.goto(`${config.url}/dashboard`);
+		await page.goto(`${config.url}/dashboard${config.random}`);
 	}, config.timeout);
 
 	afterAll(async () => {

@@ -29,7 +29,7 @@ module.exports = async function() {
 	console.log('Stopping Puppeteer...');
 	await global.__BROWSER__.close();
 
-	if (process.env.VISWIZ_API_KEY) {
+	if (process.env.VISWIZ_API_KEY && process.env.VISWIZ_PROJECT_ID) {
 		console.info('Sending build to VisWiz...');
 		const client = new VisWiz(process.env.VISWIZ_API_KEY, {
 			server: process.env.VISWIZ_SERVER || 'https://api.viswiz.io',

@@ -85,7 +85,7 @@ export default function HomepageLayout() {
 							</p>
 						</Grid.Column>
 						<Grid.Column floated="right" width={8}>
-							<Image src="//picsum.photos/500/300/?random" height={300} />
+							<Image src={`//picsum.photos/500/300/${config.RANDOM ? '?random' : ''}`} height={300} />
 						</Grid.Column>
 					</Grid.Row>
 

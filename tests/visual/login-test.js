@@ -6,7 +6,7 @@ describe('/login (Login Page)', () => {
 	beforeAll(async () => {
 		page = await __BROWSER__.newPage();
 		await page.setViewport(config.viewport);
-		await page.goto(`${config.url}/login`);
+		await page.goto(`${config.url}/login${config.random}`);
 	}, config.timeout);
 
 	afterAll(async () => {
