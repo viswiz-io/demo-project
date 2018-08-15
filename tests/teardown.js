@@ -35,7 +35,7 @@ module.exports = async function() {
 			server: process.env.VISWIZ_SERVER || 'https://api.viswiz.io',
 		});
 		await client.buildWithImages({
-			branch: process.env.TRAVIS_BRANCH || 'master',
+			branch: process.env.TRAVIS_PULL_REQUEST_BRANCH || process.env.TRAVIS_BRANCH || 'master',
 			name: getCommitName(),
 			projectID: process.env.VISWIZ_PROJECT_ID,
 			revision: process.env.TRAVIS_COMMIT || 'dev-' + new Date().toISOString(),
