@@ -22,7 +22,7 @@ export default function HomepageLayout() {
 				padded={true}
 				style={{
 					background:
-						'url(//picsum.photos/1400/400/?image=120) no-repeat 50% 0',
+						'url(//picsum.photos/id/120/1400/400) no-repeat 50% 0',
 					backgroundSize: 'cover',
 					minHeight: 400,
 				}}
@@ -85,7 +85,7 @@ export default function HomepageLayout() {
 							</p>
 						</Grid.Column>
 						<Grid.Column floated="right" width={8}>
-							<Image src={`//picsum.photos/500/300/${config.RANDOM ? '?random' : ''}`} height={300} />
+							<Image src={`//picsum.photos/${config.RANDOM ? '' : 'id/1/'}500/300`} height={300} />
 						</Grid.Column>
 					</Grid.Row>
 

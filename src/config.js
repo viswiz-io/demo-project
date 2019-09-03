@@ -1,4 +1,4 @@
-const RANDOM = window.location.search.indexOf('random=0') === -1;
+const RANDOM = window.location.search.indexOf('random=1') > -1;
 
 function list(list) {
 	if (!RANDOM) {

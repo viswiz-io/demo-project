@@ -91,6 +91,8 @@ const webpackConfig = {
 			verbose: false,
 		},
 	},
+
+	stats: 'errors-only',
 };
 
 module.exports = webpackConfig;
