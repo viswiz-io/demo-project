@@ -1,6 +1,13 @@
 {
   "presets": [
-    ["es2015", {"modules": false}],
-    "react"
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "node": "current"
+        }
+      }
+    ],
+    "@babel/preset-react"
   ]
 }
