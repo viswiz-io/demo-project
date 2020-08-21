@@ -32,8 +32,9 @@ module.exports = async function() {
 	if (process.env.VISWIZ_API_KEY && process.env.VISWIZ_PROJECT_ID) {
 		console.info('Sending build to VisWiz...');
 		const client = new VisWiz(process.env.VISWIZ_API_KEY, {
-			server: process.env.VISWIZ_SERVER || 'https://api.viswiz.io',
+			server: process.env.VISWIZ_SERVER,
 		});
+
 		await client.buildWithImages({
 			branch: process.env.TRAVIS_PULL_REQUEST_BRANCH || process.env.TRAVIS_BRANCH || 'master',
 			name: getCommitName(),
