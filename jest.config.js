@@ -3,4 +3,5 @@ module.exports = {
 	globalTeardown: './tests/teardown.js',
 	testEnvironment: './tests/test-environment.js',
 	testMatch: ['**/tests/**/*-test.js'],
+	testTimeout: 10000,
 };
