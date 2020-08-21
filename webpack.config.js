@@ -1,4 +1,3 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
@@ -10,6 +9,8 @@ const PRODUCTION = ENV === 'production';
 const webpackConfig = {
 	name: 'client',
 	target: 'web',
+
+	mode: PRODUCTION ? 'production' : 'development',
 
 	entry: {
 		vendor: [
@@ -38,10 +39,7 @@ const webpackConfig = {
 			},
 			{
 				test: /\.css$/,
-				use: ExtractTextPlugin.extract({
-					fallback: 'style-loader',
-					use: 'css-loader'
-				}),
+				use: ['style-loader', 'css-loader'],
 			},
 			{
 				loader: 'url-loader',
@@ -54,31 +52,16 @@ const webpackConfig = {
 	},
 
 	plugins: [
-		new ExtractTextPlugin('styles.css'),
-
 		new webpack.DefinePlugin({
 			'process.env': {
 				NODE_ENV: JSON.stringify(ENV),
 			},
 		}),
 
-		new webpack.optimize.CommonsChunkPlugin({
-			name: 'vendor',
-			minChunks: Infinity,
-		}),
-
 		new HtmlWebpackPlugin({
 			template: 'public/index.html',
 		}),
 
-		PRODUCTION &&
-			new webpack.optimize.UglifyJsPlugin({
-				compress: {
-					unused: true,
-					dead_code: true,
-					warnings: false,
-				},
-			}),
 	].filter(plugin => !!plugin),
 
 	resolve: {

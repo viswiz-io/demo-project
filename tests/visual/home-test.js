@@ -7,7 +7,7 @@ describe('/ (Home Page)', () => {
 		page = await __BROWSER__.newPage();
 		await page.setViewport(config.viewport);
 		await page.goto(`${config.url}/${config.random}`);
-	}, config.timeout);
+	});
 
 	afterAll(async () => {
 		await page.close();
@@ -24,7 +24,6 @@ describe('/ (Home Page)', () => {
 				fullPage: true,
 				path: imageFile,
 			});
-		},
-		config.timeout,
+		}
 	);
 });

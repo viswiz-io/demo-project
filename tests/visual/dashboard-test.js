@@ -7,7 +7,7 @@ describe('/dashboard (Dashboard Page)', () => {
 		page = await __BROWSER__.newPage();
 		await page.setViewport(config.viewport);
 		await page.goto(`${config.url}/dashboard${config.random}`);
-	}, config.timeout);
+	});
 
 	afterAll(async () => {
 		await page.close();
@@ -24,7 +24,6 @@ describe('/dashboard (Dashboard Page)', () => {
 				fullPage: true,
 				path: imageFile,
 			});
-		},
-		config.timeout,
+		}
 	);
 });
