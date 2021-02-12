@@ -36,10 +36,10 @@ module.exports = async function() {
 		});
 
 		await client.buildWithImages({
-			branch: process.env.CI_ACTION_REF_NAME || 'master',
+			branch: process.env.GITHUB_HEAD_REF || process.env.GITHUB_BRANCH_NAME || 'master',
 			name: getCommitName(),
 			projectID: process.env.VISWIZ_PROJECT_ID,
-			revision: process.env.CI_SHA || 'dev-' + new Date().toISOString(),
+			revision: process.env.GITHUB_COMMIT_SHA || 'dev-' + new Date().toISOString(),
 		}, config.outputDir);
 	}
 };

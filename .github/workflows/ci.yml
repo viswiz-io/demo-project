@@ -7,44 +7,28 @@ on:
     branches: [ master ]
 
 jobs:
-  # https://github.community/t/accessing-commit-message-in-pull-request-event/17158/9
-  envs:
+  build:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
         with:
-          # We need to fetch with a depth of 2 for pull_request so we can do HEAD^2
-          fetch-depth: 2
+          ref: ${{ github.event.pull_request.head.sha }}
 
-      - if: github.event_name == 'push'
-        id: push_get_commit_message
-        run: echo "::set-output name=push_commit_message::$(git log --format=%B -n 1 HEAD)"
+      - id: git
+        run: |
+          echo "::set-output name=branch_name::${GITHUB_REF##ref/heads/}"
+          echo "::set-output name=commit_message::$(git log --format=%B -n 1 HEAD)"
+          echo "::set-output name=commit_sha::$(git log --format=%H -n 1 HEAD)"
 
-      - if: github.event_name == 'pull_request'
-        id: pr_get_commit_message
-        run: echo "::set-output name=pr_commit_message::$(git log --format=%B -n 1 HEAD^2)"
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12'
 
-      - id: get_commit_message
-        run: echo "::set-output name=commit_message::$([ -z "${{ steps.pr_get_commit_message.outputs.pr_commit_message }}" ] && echo ${{ steps.push_get_commit_message.outputs.push_commit_message }} || echo ${{ steps.pr_get_commit_message.outputs.pr_commit_message }})"
-
-    outputs:
-      commit_message: ${{ steps.get_commit_message.outputs.commit_message }}
-
-  build:
-    needs: envs
-    runs-on: ubuntu-20.04
-    steps:
-    - uses: actions/checkout@v2
-
-    - uses: FranzDiebold/github-env-vars-action@v2
-
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '12'
-
-    - run: yarn
-    - run: yarn test
-      env:
-        GITHUB_COMMIT_MESSAGE: ${{ needs.envs.outputs.commit_message }}
-        VISWIZ_API_KEY: ${{ secrets.VISWIZ_API_KEY }}
-        VISWIZ_PROJECT_ID: 25p4pYTp6CjE9oANcgJpaU
+      - run: yarn
+      - run: yarn test
+        env:
+          GITHUB_BRANCH_NAME: ${{ steps.git.outputs.branch_name }}
+          GITHUB_COMMIT_MESSAGE: ${{ steps.git.outputs.commit_message }}
+          GITHUB_COMMIT_SHA: ${{ steps.git.outputs.commit_sha }}
+          VISWIZ_API_KEY: ${{ secrets.VISWIZ_API_KEY }}
+          VISWIZ_PROJECT_ID: 25p4pYTp6CjE9oANcgJpaU
