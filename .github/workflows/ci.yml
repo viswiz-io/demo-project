@@ -27,6 +27,7 @@ jobs:
       - run: yarn
       - run: yarn test
         env:
+          RANDOM: '1'
           GITHUB_BRANCH_NAME: ${{ steps.git.outputs.branch_name }}
           GITHUB_COMMIT_MESSAGE: ${{ steps.git.outputs.commit_message }}
           GITHUB_COMMIT_SHA: ${{ steps.git.outputs.commit_sha }}
