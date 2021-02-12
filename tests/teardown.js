@@ -8,8 +8,8 @@ function random(list) {
 }
 
 function getCommitName() {
-	if (process.env.TRAVIS_COMMIT_MESSAGE) {
-		return process.env.TRAVIS_COMMIT_MESSAGE;
+	if (process.env.GITHUB_COMMIT_MESSAGE) {
+		return process.env.GITHUB_COMMIT_MESSAGE;
 	}
 	if (fs.existsSync('tmp/commits.txt')) {
 		const commits = fs
@@ -36,10 +36,10 @@ module.exports = async function() {
 		});
 
 		await client.buildWithImages({
-			branch: process.env.TRAVIS_PULL_REQUEST_BRANCH || process.env.TRAVIS_BRANCH || 'master',
+			branch: process.env.CI_ACTION_REF_NAME || 'master',
 			name: getCommitName(),
 			projectID: process.env.VISWIZ_PROJECT_ID,
-			revision: process.env.TRAVIS_COMMIT || 'dev-' + new Date().toISOString(),
+			revision: process.env.CI_SHA || 'dev-' + new Date().toISOString(),
 		}, config.outputDir);
 	}
 };
