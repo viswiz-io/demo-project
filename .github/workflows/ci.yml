@@ -45,6 +45,7 @@ jobs:
     - run: yarn
     - run: yarn test
       env:
+        RANDOM: '1'
         GITHUB_COMMIT_MESSAGE: ${{ needs.envs.outputs.commit_message }}
         VISWIZ_API_KEY: ${{ secrets.VISWIZ_API_KEY }}
         VISWIZ_PROJECT_ID: 25p4pYTp6CjE9oANcgJpaU
