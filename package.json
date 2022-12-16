@@ -30,12 +30,14 @@
     "semantic-ui-react": "1.2.1",
     "style-loader": "1.2.1",
     "url-loader": "4.1.0",
-    "viswiz-sdk": "5.2.2",
     "webpack": "4.44.1",
     "webpack-cli": "3.3.12",
     "webpack-dev-server": "3.11.0"
   },
   "resolutions": {
     "https-proxy-agent": "5.0.0"
+  },
+  "volta": {
+    "node": "16.19.0"
   }
 }

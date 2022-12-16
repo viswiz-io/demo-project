@@ -7,28 +7,34 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ github.head_ref || github.ref }}
 
-      - id: git
-        run: |
-          echo "::set-output name=branch_name::${GITHUB_REF##refs/heads/}"
-          echo "::set-output name=commit_message::$(git log --format=%B -n 1 HEAD)"
-          echo "::set-output name=commit_sha::$(git log --format=%H -n 1 HEAD)"
-
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v3
         with:
-          node-version: '12'
+          node-version: '16'
+
+      - name: Get yarn cache directory
+        id: yarn-cache-dir
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        with:
+          path: ${{ steps.yarn-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
 
       - run: yarn
+
       - run: yarn test
-        env:
-          GITHUB_BRANCH_NAME: ${{ steps.git.outputs.branch_name }}
-          GITHUB_COMMIT_MESSAGE: ${{ steps.git.outputs.commit_message }}
-          GITHUB_COMMIT_SHA: ${{ steps.git.outputs.commit_sha }}
-          VISWIZ_API_KEY: ${{ secrets.VISWIZ_API_KEY }}
-          VISWIZ_PROJECT_ID: 25p4pYTp6CjE9oANcgJpaU
+
+      - uses: viswiz-io/github-action@v1.0.1
+        with:
+          api-key: ${{ secrets.VISWIZ_API_KEY }}
+          images-directory: ./output/
+          project-id: 25p4pYTp6CjE9oANcgJpaU
