@@ -37,4 +37,4 @@ jobs:
         with:
           api-key: ${{ secrets.VISWIZ_API_KEY }}
           images-directory: ./output/
-          project-id: 25p4pYTp6CjE9oANcgJpaU
+          project-id: ${{ secrets.VISWIZ_PROJECT_ID }}
