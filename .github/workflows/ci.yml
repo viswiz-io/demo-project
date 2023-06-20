@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
@@ -33,7 +33,7 @@ jobs:
 
       - run: yarn test
 
-      - uses: viswiz-io/github-action@v1.0.1
+      - uses: viswiz-io/github-action@v1.0.2
         with:
           api-key: ${{ secrets.VISWIZ_API_KEY }}
           images-directory: ./output/
