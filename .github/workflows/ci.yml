@@ -33,8 +33,8 @@ jobs:
 
       - run: yarn test
 
-      - uses: viswiz-io/github-action@v1.0.1
+      - uses: viswiz-io/github-action@v1.0.2
         with:
           api-key: ${{ secrets.VISWIZ_API_KEY }}
           images-directory: ./output/
-          project-id: 25p4pYTp6CjE9oANcgJpaU
+          project-id: ${{ secrets.VISWIZ_PROJECT_ID }}
