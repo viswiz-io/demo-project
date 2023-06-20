@@ -6,9 +6,9 @@
   "license": "MIT",
   "scripts": {
     "build": "webpack",
-    "build:production": "NODE_ENV=production yarn build",
+    "build:production": "NODE_ENV=production pnpm build",
     "dev": "webpack-dev-server",
-    "postinstall": "yarn build",
+    "postinstall": "pnpm build",
     "test": "jest",
     "watch": "webpack --watch"
   },
@@ -39,5 +39,6 @@
   },
   "volta": {
     "node": "16.19.0"
-  }
+  },
+  "packageManager": "pnpm@8.6.3"
 }

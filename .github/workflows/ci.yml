@@ -14,26 +14,20 @@ jobs:
         with:
           ref: ${{ github.head_ref || github.ref }}
 
+      - uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 8.6.3
+
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
+          cache: 'pnpm'
 
-      - name: Get yarn cache directory
-        id: yarn-cache-dir
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+      - run: pnpm install --frozen-lockfile
 
-      - uses: actions/cache@v3
-        with:
-          path: ${{ steps.yarn-cache-dir.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+      - run: pnpm test
 
-      - run: yarn
-
-      - run: yarn test
-
-      - uses: viswiz-io/github-action@v1.0.2
+      - uses: viswiz-io/github-action@refactor/pnpm
         with:
           api-key: ${{ secrets.VISWIZ_API_KEY }}
           images-directory: ./output/
